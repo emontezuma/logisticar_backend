@@ -10,8 +10,8 @@ Public Class XtraForm2
     End Sub
 
     Private Sub SimpleButton1_Click(sender As Object, e As EventArgs) Handles SimpleButton1.Click
-        'Dim cadSQL As String = "SELECT estatus, rol, referencia, nombre FROM sigma.cat_usuarios WHERE referencia = '" & TextEdit1.Text & "' AND clave = '" & Cifrado(1, 1, TextEdit2.Text, "VW&Crono", "VW&Crono") & "'"
-        Dim cadSQL As String = "SELECT estatus, rol, referencia, nombre FROM sigma.cat_usuarios WHERE referencia = '" & TextEdit1.Text & "' AND clave = '" & TextEdit2.Text & "'"
+        'Dim cadSQL As String = "SELECT estatus, rol, referencia, nombre FROM " & rutabd & ".cat_usuarios WHERE referencia = '" & TextEdit1.Text & "' AND clave = '" & Cifrado(1, 1, TextEdit2.Text, "VW&Crono", "VW&Crono") & "'"
+        Dim cadSQL As String = "SELECT estatus, rol, referencia, nombre FROM " & rutaBD & ".cat_usuarios WHERE referencia = '" & TextEdit1.Text & "' AND AES_DECRYPT(clave, 'LogisEicarlronoVI201i') = '" & TextEdit2.Text & "'"
         Dim reader As DataSet = consultaSEL(cadSQL)
 
         If reader.Tables(0).Rows.Count > 0 Then

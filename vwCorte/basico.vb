@@ -12,9 +12,10 @@ Module basico
     Public ultimaFalla
     Public autenticado As Boolean
     Public usuarioCerrar As String
+    Public rutaBD As String = "logisticar"
 
     Sub Main()
-        Dim cadSQL As String = "SELECT ultimo_corte FROM sigma.configuracion"
+        Dim cadSQL As String = "SELECT ultimo_corte FROM " & rutaBD & ".configuracion"
         Dim reader As DataSet = consultaSEL(cadSQL)
         Dim regsAfectados = 0
         If errorBD.Length > 0 Then
@@ -25,7 +26,7 @@ Module basico
                 Dim miFMinima
                 If reader.Tables(0).Rows(0)!ultimo_corte.Equals(System.DBNull.Value) Then
                     cortar = True
-                    cadSQL = "SELECT MIN(inicio) as fminima FROM sigma.alarmas"
+                    cadSQL = "SELECT MIN(inicio) as fminima FROM " & rutaBD & ".alarmas"
                     Dim fMinima As DataSet = consultaSEL(cadSQL)
                     If fMinima.Tables(0).Rows.Count > 0 Then
                         miFMinima = fMinima.Tables(0).Rows(0)!fminima
@@ -45,7 +46,7 @@ Module basico
                     Dim cortes = 0
                     Do While Not Salir
 
-                        regsAfectados = consultaACT("DELETE FROM sigma.vw_resumen WHERE desde = '" & piso & "';INSERT INTO sigma.vw_resumen (desde, hasta, nave, estacion, responsable, tecnologia, codigo, fallas_generadas, fallas_cerradas, fallas_escaladas, fallas_entiempo, fallas_total) SELECT '" & piso & "', '" & techo & "', vw_alarmas.nave, vw_alarmas.estacion, vw_alarmas.responsable, vw_alarmas.tecnologia, vw_alarmas.codigo, SUM(IF(vw_alarmas.inicio >= '" & piso & "' AND vw_alarmas.inicio <= '" & techo & "', 1, 0)), SUM(IF(vw_alarmas.fin >= '" & piso & "' AND vw_alarmas.fin <= '" & techo & "' AND vw_alarmas.tiempo > 0, 1, 0)), SUM(IF(vw_reportes.escalamientos > 0 AND vw_alarmas.tiempo > 0, 1, 0)), SUM(IF((vw_reportes.escalamientos = 0 OR ISNULL(vw_reportes.escalamientos)) AND vw_alarmas.tiempo > 0, 1, 0)), SUM(IF(vw_alarmas.tiempo = 0, 1, 0)) FROM sigma.alarmas LEFT JOIN sigma.vw_reportes ON vw_alarmas.reporte = vw_reportes.id GROUP BY vw_alarmas.nave, vw_alarmas.estacion, vw_alarmas.responsable, vw_alarmas.tecnologia, vw_alarmas.codigo")
+                        regsAfectados = consultaACT("DELETE FROM " & rutaBD & ".vw_resumen WHERE desde = '" & piso & "';INSERT INTO " & rutaBD & ".vw_resumen (desde, hasta, nave, estacion, responsable, tecnologia, codigo, fallas_generadas, fallas_cerradas, fallas_escaladas, fallas_entiempo, fallas_total) SELECT '" & piso & "', '" & techo & "', vw_alarmas.nave, vw_alarmas.estacion, vw_alarmas.responsable, vw_alarmas.tecnologia, vw_alarmas.codigo, SUM(IF(vw_alarmas.inicio >= '" & piso & "' AND vw_alarmas.inicio <= '" & techo & "', 1, 0)), SUM(IF(vw_alarmas.fin >= '" & piso & "' AND vw_alarmas.fin <= '" & techo & "' AND vw_alarmas.tiempo > 0, 1, 0)), SUM(IF(vw_reportes.escalamientos > 0 AND vw_alarmas.tiempo > 0, 1, 0)), SUM(IF((vw_reportes.escalamientos = 0 OR ISNULL(vw_reportes.escalamientos)) AND vw_alarmas.tiempo > 0, 1, 0)), SUM(IF(vw_alarmas.tiempo = 0, 1, 0)) FROM " & rutaBD & ".alarmas LEFT JOIN " & rutaBD & ".vw_reportes ON vw_alarmas.reporte = vw_reportes.id GROUP BY vw_alarmas.nave, vw_alarmas.estacion, vw_alarmas.responsable, vw_alarmas.tecnologia, vw_alarmas.codigo")
                         cortes = cortes + regsAfectados
                         Dim nPiso = DateAdd(DateInterval.Hour, 1, CDate(piso))
                         If Format(nPiso, "yyyy/MM/dd HH") >= Format(Now(), "yyyy/MM/dd HH") Then
@@ -55,7 +56,7 @@ Module basico
                             techo = Format(CDate(piso), "yyyy/MM/dd HH") & ":59:59"
                         End If
                     Loop
-                    regsAfectados = consultaACT("UPDATE sigma.configuracion SET ultimo_corte = '" & Format(Now, "yyyy/MM/dd HH:mm:ss") & "'")
+                    regsAfectados = consultaACT("UPDATE " & rutaBD & ".configuracion SET ultimo_corte = '" & Format(Now, "yyyy/MM/dd HH:mm:ss") & "'")
                     agregarLOG(IIf(cortes = 1, "Se agregó un registro", "Se agregaron " & cortes & " registros") & " a las estadísticas de fallas (cortes)", 9, 0)
                 End If
             End If
@@ -69,9 +70,9 @@ Module basico
         'tipo 2: Incongruencia en los datos (usuario)
         'tipo 8: Error crítico de Base de datos infofallas
         'tipo 9: Error crítico de Base de datos sigma
-        Dim regsAfectados = consultaACT("INSERT INTO sigma.log (aplicacion, tipo, reporte, texto) VALUES (30, " & tipo & ", " & reporte & ", '" & Microsoft.VisualBasic.Strings.Left(cadena, 250) & "')")
+        Dim regsAfectados = consultaACT("INSERT INTO " & rutaBD & ".log (aplicacion, tipo, reporte, texto) VALUES (30, " & tipo & ", " & reporte & ", '" & Microsoft.VisualBasic.Strings.Left(cadena, 250) & "')")
         If aplicacion = 10 Then
-            regsAfectados = consultaACT("UPDATE sigma.configuracion SET flag_monitor = 'S'")
+            regsAfectados = consultaACT("UPDATE " & rutaBD & ".configuracion SET flag_monitor = 'S'")
         End If
     End Sub
     Public Function consultaACT(cadena As String) As Integer

@@ -11,6 +11,8 @@ Module basico
     Public ultimaFalla
     Public autenticado As Boolean
     Public usuarioCerrar As String
+    Public cadenaConexion As String
+    Public rutaBD As String = "logisticar"
 
     Public Function conexion() As MySqlConnection
         conexion = Nothing
@@ -18,7 +20,7 @@ Module basico
         Try
             conexion = New MySqlConnection
 
-            conexion.ConnectionString = cadenaConexion()
+            conexion.ConnectionString = cadenaConexion
 
 
             conexion.Open()
@@ -31,7 +33,7 @@ Module basico
     Public Function consultaACT(cadena As String) As Integer
         Dim miConexion = New MySqlConnection
 
-        miConexion.ConnectionString = cadenaConexion()
+        miConexion.ConnectionString = cadenaConexion
 
         miConexion.Open()
         consultaACT = 0
@@ -57,7 +59,7 @@ Module basico
             errorBD = ""
             Dim miConexion = New MySqlConnection
 
-            miConexion.ConnectionString = cadenaConexion()
+            miConexion.ConnectionString = cadenaConexion
 
             miConexion.Open()
 
@@ -155,10 +157,10 @@ Module basico
         End Try
     End Function
 
-    Function cadenaConexion() As String
-        cadenaConexion = "server=localhost;user id=root;password=usbw;port=3307;Convert Zero Datetime=True"
-        'cadenaConexion = "server=10.241.241.30;user id=root;password=usbw;port=3307;Convert Zero Datetime=True"
-    End Function
+    'Function cadenaConexion() As String
+    'cadenaConexion = "server=localhost;user id=root;password=usbw;port=3307;Convert Zero Datetime=True"
+    'cadenaConexion = "server=10.241.241.30;user id=root;password=usbw;port=3307;Convert Zero Datetime=True"
+    'End Function
 
     Public Function Cifrado(ByVal modo As Byte, ByVal Algoritmo As Byte, ByVal cadena As String, ByVal key As String, ByVal VecI As String) As String
 
