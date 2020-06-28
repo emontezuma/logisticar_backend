@@ -59,9 +59,10 @@ Partial Class Form1
         Me.GroupControl5.Controls.Add(Me.SimpleButton8)
         Me.GroupControl5.Controls.Add(Me.TextEdit16)
         Me.GroupControl5.Controls.Add(Me.LabelControl27)
-        Me.GroupControl5.Location = New System.Drawing.Point(12, 131)
+        Me.GroupControl5.Location = New System.Drawing.Point(9, 106)
+        Me.GroupControl5.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.GroupControl5.Name = "GroupControl5"
-        Me.GroupControl5.Size = New System.Drawing.Size(496, 116)
+        Me.GroupControl5.Size = New System.Drawing.Size(372, 94)
         Me.GroupControl5.TabIndex = 0
         Me.GroupControl5.Text = "Configuración para la reproducción de audio"
         '
@@ -69,23 +70,25 @@ Partial Class Form1
         '
         Me.LabelControl3.Appearance.Font = New System.Drawing.Font("Lucida Sans", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl3.Appearance.Options.UseFont = True
-        Me.LabelControl3.Location = New System.Drawing.Point(17, 81)
+        Me.LabelControl3.Location = New System.Drawing.Point(13, 66)
+        Me.LabelControl3.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.LabelControl3.Name = "LabelControl3"
-        Me.LabelControl3.Size = New System.Drawing.Size(93, 17)
+        Me.LabelControl3.Size = New System.Drawing.Size(73, 15)
         Me.LabelControl3.TabIndex = 3
         Me.LabelControl3.Text = "Revisar (seg)"
         '
         'TextEdit3
         '
         Me.TextEdit3.EditValue = "10"
-        Me.TextEdit3.Location = New System.Drawing.Point(118, 77)
+        Me.TextEdit3.Location = New System.Drawing.Point(88, 63)
+        Me.TextEdit3.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TextEdit3.Name = "TextEdit3"
         Me.TextEdit3.Properties.Appearance.Font = New System.Drawing.Font("Lucida Sans", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextEdit3.Properties.Appearance.Options.UseFont = True
         Me.TextEdit3.Properties.Appearance.Options.UseTextOptions = True
         Me.TextEdit3.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far
         Me.TextEdit3.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat
-        Me.TextEdit3.Size = New System.Drawing.Size(59, 26)
+        Me.TextEdit3.Size = New System.Drawing.Size(44, 24)
         Me.TextEdit3.TabIndex = 4
         '
         'SimpleButton8
@@ -98,16 +101,18 @@ Partial Class Form1
         Me.SimpleButton8.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center
         Me.SimpleButton8.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center
         Me.SimpleButton8.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat
-        Me.SimpleButton8.Location = New System.Drawing.Point(449, 46)
+        Me.SimpleButton8.Location = New System.Drawing.Point(337, 37)
+        Me.SimpleButton8.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.SimpleButton8.Name = "SimpleButton8"
-        Me.SimpleButton8.Size = New System.Drawing.Size(28, 25)
+        Me.SimpleButton8.Size = New System.Drawing.Size(21, 20)
         Me.SimpleButton8.TabIndex = 2
         Me.SimpleButton8.Text = "..."
         '
         'TextEdit16
         '
         Me.TextEdit16.EditValue = ""
-        Me.TextEdit16.Location = New System.Drawing.Point(118, 45)
+        Me.TextEdit16.Location = New System.Drawing.Point(88, 37)
+        Me.TextEdit16.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TextEdit16.Name = "TextEdit16"
         Me.TextEdit16.Properties.Appearance.Font = New System.Drawing.Font("Lucida Sans", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextEdit16.Properties.Appearance.Options.UseFont = True
@@ -118,16 +123,17 @@ Partial Class Form1
         Me.TextEdit16.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat
         Me.TextEdit16.Properties.MaxLength = 500
         Me.TextEdit16.Properties.NullText = "Usuario del servicio de SMS"
-        Me.TextEdit16.Size = New System.Drawing.Size(325, 26)
+        Me.TextEdit16.Size = New System.Drawing.Size(244, 24)
         Me.TextEdit16.TabIndex = 1
         '
         'LabelControl27
         '
         Me.LabelControl27.Appearance.Font = New System.Drawing.Font("Lucida Sans", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelControl27.Appearance.Options.UseFont = True
-        Me.LabelControl27.Location = New System.Drawing.Point(17, 49)
+        Me.LabelControl27.Location = New System.Drawing.Point(13, 40)
+        Me.LabelControl27.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.LabelControl27.Name = "LabelControl27"
-        Me.LabelControl27.Size = New System.Drawing.Size(33, 17)
+        Me.LabelControl27.Size = New System.Drawing.Size(27, 15)
         Me.LabelControl27.TabIndex = 0
         Me.LabelControl27.Text = "&Ruta"
         '
@@ -144,25 +150,25 @@ Partial Class Form1
         Me.ContextMenuStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripSeparator1, Me.ToolStripMenuItem3})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(179, 54)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(156, 54)
         Me.ContextMenuStrip1.Text = "Configuración"
         '
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.Font = New System.Drawing.Font("Lucida Sans", 9.0!)
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(178, 22)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(155, 22)
         Me.ToolStripMenuItem1.Text = "Configuración"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(175, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(152, 6)
         '
         'ToolStripMenuItem3
         '
         Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
-        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(178, 22)
+        Me.ToolStripMenuItem3.Size = New System.Drawing.Size(155, 22)
         Me.ToolStripMenuItem3.Text = "Cerrar"
         '
         'Timer1
@@ -183,9 +189,10 @@ Partial Class Form1
         Me.SimpleButton2.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center
         Me.SimpleButton2.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat
         Me.SimpleButton2.ImageOptions.Image = CType(resources.GetObject("SimpleButton2.ImageOptions.Image"), System.Drawing.Image)
-        Me.SimpleButton2.Location = New System.Drawing.Point(386, 260)
+        Me.SimpleButton2.Location = New System.Drawing.Point(290, 211)
+        Me.SimpleButton2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.SimpleButton2.Name = "SimpleButton2"
-        Me.SimpleButton2.Size = New System.Drawing.Size(122, 38)
+        Me.SimpleButton2.Size = New System.Drawing.Size(92, 31)
         Me.SimpleButton2.TabIndex = 2
         Me.SimpleButton2.Text = "&Cerrar"
         '
@@ -200,9 +207,10 @@ Partial Class Form1
         Me.SimpleButton1.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center
         Me.SimpleButton1.ButtonStyle = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat
         Me.SimpleButton1.ImageOptions.Image = CType(resources.GetObject("SimpleButton1.ImageOptions.Image"), System.Drawing.Image)
-        Me.SimpleButton1.Location = New System.Drawing.Point(258, 260)
+        Me.SimpleButton1.Location = New System.Drawing.Point(194, 211)
+        Me.SimpleButton1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.SimpleButton1.Name = "SimpleButton1"
-        Me.SimpleButton1.Size = New System.Drawing.Size(122, 38)
+        Me.SimpleButton1.Size = New System.Drawing.Size(92, 31)
         Me.SimpleButton1.TabIndex = 1
         Me.SimpleButton1.Text = "&Guardar"
         '
@@ -210,9 +218,10 @@ Partial Class Form1
         '
         Me.LinkLabel1.AutoSize = True
         Me.LinkLabel1.Font = New System.Drawing.Font("Lucida Sans", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LinkLabel1.Location = New System.Drawing.Point(139, 108)
+        Me.LinkLabel1.Location = New System.Drawing.Point(104, 88)
+        Me.LinkLabel1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.LinkLabel1.Name = "LinkLabel1"
-        Me.LinkLabel1.Size = New System.Drawing.Size(177, 17)
+        Me.LinkLabel1.Size = New System.Drawing.Size(149, 15)
         Me.LinkLabel1.TabIndex = 15
         Me.LinkLabel1.TabStop = True
         Me.LinkLabel1.Text = "www.mmcallmexico.mx"
@@ -221,25 +230,27 @@ Partial Class Form1
         '
         Me.PictureBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(183, Byte), Integer), CType(CType(2, Byte), Integer))
         Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(5, 8)
+        Me.PictureBox1.Location = New System.Drawing.Point(4, 6)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(503, 102)
+        Me.PictureBox1.Size = New System.Drawing.Size(377, 83)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox1.TabIndex = 14
         Me.PictureBox1.TabStop = False
         '
         'Form1
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(520, 308)
+        Me.ClientSize = New System.Drawing.Size(390, 250)
         Me.Controls.Add(Me.LinkLabel1)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.SimpleButton2)
         Me.Controls.Add(Me.SimpleButton1)
         Me.Controls.Add(Me.GroupControl5)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "Form1"

@@ -31,34 +31,34 @@ Partial Class Form1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Lucida Sans", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(14, 11)
+        Me.Label1.Location = New System.Drawing.Point(9, 7)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(337, 21)
+        Me.Label1.Size = New System.Drawing.Size(225, 15)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "SIGMA Monitor - Gestión de reportes"
         '
         'ChartControl1
         '
         Me.ChartControl1.Legend.Name = "Default Legend"
-        Me.ChartControl1.Location = New System.Drawing.Point(234, 100)
-        Me.ChartControl1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.ChartControl1.Location = New System.Drawing.Point(156, 65)
+        Me.ChartControl1.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.ChartControl1.Name = "ChartControl1"
         Me.ChartControl1.SeriesSerializable = New DevExpress.XtraCharts.Series(-1) {}
-        Me.ChartControl1.SeriesTemplate.SeriesColorizer = Nothing
-        Me.ChartControl1.Size = New System.Drawing.Size(76, 36)
+        Me.ChartControl1.Size = New System.Drawing.Size(51, 23)
         Me.ChartControl1.TabIndex = 2
         Me.ChartControl1.Visible = False
         '
         'Form1
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(403, 49)
+        Me.ClientSize = New System.Drawing.Size(269, 32)
         Me.ControlBox = False
         Me.Controls.Add(Me.ChartControl1)
         Me.Controls.Add(Me.Label1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
-        Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
+        Me.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.Name = "Form1"
         CType(Me.ChartControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
