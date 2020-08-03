@@ -81,7 +81,7 @@ Public Class XtraForm1
                 End If
             End If
             TextEdit1.Text = "Cadena de conexión: " & cadenaConexion
-            actualizarBD()
+            'actualizarBD()
         End If
         BarStaticItem1.Caption = "Ejecutando desde " & Format(Now(), "dddd, dd-MMM-yyyy HH:mm:ss")
         estadoPrograma = True
@@ -207,7 +207,11 @@ Public Class XtraForm1
     End Sub
 
     Private Sub revisaFlag_Tick(sender As Object, e As EventArgs) Handles revisaFlag.Tick
-        If enMonitor Or Not estadoPrograma Then Exit Sub
+        Me.Text = "Monitor de eventos (" & Format(DateAndTime.Now(), "ddd, dd/MMM/yyyy HH:mm:ss") & ")"
+        If enMonitor Or Not estadoPrograma Then
+            agregarSolo("No entró a la revisión, estaba ocupada")
+            Exit Sub
+        End If
 
         validarLicencia()
 
@@ -243,7 +247,7 @@ Public Class XtraForm1
         End If
         calcularRevision()
         enMonitor = True
-        revisaFlag.Enabled = False
+        'revisaFlag.Enabled = False
         revisarEventos()
         cancelarAlertas()
         depurar()
@@ -252,7 +256,7 @@ Public Class XtraForm1
         rev_llamadas()
         enviar_mensajes()
 
-        revisaFlag.Enabled = True
+        'revisaFlag.Enabled = True
 
     End Sub
 
@@ -679,7 +683,7 @@ Public Class XtraForm1
     Private Sub enviar_mensajes()
         If Not estadoPrograma Then Exit Sub
         Dim cadSQL = "SELECT canal FROM " & rutaBD & ".mensajes WHERE estatus = 'E' GROUP BY canal"
-                    Dim falla As DataSet = consultaSEL(cadSQL)
+        Dim falla As DataSet = consultaSEL(cadSQL)
 
         If falla.Tables(0).Rows.Count > 0 Then
             For Each lotes In falla.Tables(0).Rows
@@ -2544,6 +2548,10 @@ Public Class XtraForm1
         reader.Close()
     End Sub
 
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        Dim regsAfectados = consultaACT("UPDATE " & rutaBD & ".configuracion SET ultima_actualizacion = NOW()")
+    End Sub
+
     Function traducirMensaje(mensaje As String) As String
         traducirMensaje = mensaje
         Dim cadSQL As String = ""
@@ -2659,7 +2667,7 @@ CREATE TABLE `alarmas` (
   KEY `NewIndex1` (`alerta`,`inicio`),
   KEY `NewIndex2` (`inicio`),
   KEY `NewIndex3` (`tiempo`)
-) ENGINE=MyISAM AUTO_INCREMENT=36236 DEFAULT CHARSET=latin1 COMMENT='Detalle de alarmas';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COMMENT='Detalle de alarmas';
 
 /*Table structure for table `cat_alertas` */
 
@@ -2792,7 +2800,7 @@ CREATE TABLE `cat_alertas` (
   `modificado` bigint(20) DEFAULT NULL COMMENT 'Modificado por',
   PRIMARY KEY (`id`),
   KEY `NewIndex1` (`evento`,`proceso`,`estatus`)
-) ENGINE=MyISAM AUTO_INCREMENT=88 DEFAULT CHARSET=latin1 COMMENT='Catálogo de alertas';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COMMENT='Catálogo de alertas';
 
 /*Table structure for table `cat_areas` */
 
@@ -2819,7 +2827,7 @@ CREATE TABLE `cat_areas` (
   `creado` bigint(11) DEFAULT NULL COMMENT 'Creado por',
   `modificado` bigint(11) DEFAULT NULL COMMENT 'Modificado por',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10000 DEFAULT CHARSET=latin1 COMMENT='Catálogo de áreas';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COMMENT='Catálogo de áreas';
 
 /*Table structure for table `cat_choferes` */
 
@@ -2842,7 +2850,7 @@ CREATE TABLE `cat_choferes` (
   PRIMARY KEY (`id`),
   KEY `NewIndex1` (`nombre`),
   KEY `NewIndex2` (`referencia`)
-) ENGINE=MyISAM AUTO_INCREMENT=1147 DEFAULT CHARSET=latin1 COMMENT='Catálogo de áreas';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COMMENT='Catálogo de áreas';
 
 /*Table structure for table `cat_correos` */
 
@@ -2866,7 +2874,7 @@ CREATE TABLE `cat_correos` (
   `creado` bigint(20) DEFAULT '0' COMMENT 'Creado por',
   `modificado` bigint(20) DEFAULT '0' COMMENT 'Modificado por',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1 COMMENT='Catálogo de correos';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COMMENT='Catálogo de correos';
 
 /*Table structure for table `cat_defectos` */
 
@@ -2911,7 +2919,7 @@ CREATE TABLE `cat_descargas` (
   `modificado` bigint(11) DEFAULT NULL COMMENT 'Modificado por',
   PRIMARY KEY (`id`),
   KEY `NewIndex1` (`destino`,`transporte`,`tipo`,`carga`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 /*Table structure for table `cat_destinos` */
 
@@ -2943,7 +2951,7 @@ CREATE TABLE `cat_destinos` (
   PRIMARY KEY (`id`),
   KEY `inicial` (`inicial`,`estatus`),
   KEY `final` (`final`,`estatus`)
-) ENGINE=MyISAM AUTO_INCREMENT=74 DEFAULT CHARSET=latin1 COMMENT='Catálogo de destinos';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COMMENT='Catálogo de destinos';
 
 /*Table structure for table `cat_distribucion` */
 
@@ -2967,7 +2975,7 @@ CREATE TABLE `cat_distribucion` (
   `creado` bigint(20) DEFAULT NULL COMMENT 'Creado por',
   `modificado` bigint(20) DEFAULT NULL COMMENT 'Modificado por',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=latin1 COMMENT='Catálogo de listas de distribución';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COMMENT='Catálogo de listas de distribución';
 
 /*Table structure for table `cat_equipos` */
 
@@ -3013,7 +3021,7 @@ CREATE TABLE `cat_frases` (
   `creado` bigint(11) DEFAULT NULL COMMENT 'Creado por',
   `modificado` bigint(11) DEFAULT NULL COMMENT 'Modificado por',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 /*Table structure for table `cat_generales` */
 
@@ -3035,7 +3043,7 @@ CREATE TABLE `cat_generales` (
   `modificado` bigint(20) DEFAULT '0' COMMENT 'Modificado por',
   PRIMARY KEY (`id`),
   KEY `NewIndex1` (`id_relacionado`)
-) ENGINE=MyISAM AUTO_INCREMENT=65 DEFAULT CHARSET=latin1 COMMENT='Tablas generales';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COMMENT='Tablas generales';
 
 /*Table structure for table `cat_grupos` */
 
@@ -3056,7 +3064,7 @@ CREATE TABLE `cat_grupos` (
   `creado` bigint(11) DEFAULT NULL COMMENT 'Creado por',
   `modificado` bigint(11) DEFAULT NULL COMMENT 'Modificado por',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COMMENT='Catálogo de grupos';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COMMENT='Catálogo de grupos';
 
 /*Table structure for table `cat_listas` */
 
@@ -3082,7 +3090,7 @@ CREATE TABLE `cat_listas` (
   `creado` bigint(11) DEFAULT NULL COMMENT 'Creado por',
   `modificado` bigint(11) DEFAULT NULL COMMENT 'Modificado por',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COMMENT='Catálogo de listas de verificación';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COMMENT='Catálogo de listas de verificación';
 
 /*Table structure for table `cat_medios` */
 
@@ -3100,7 +3108,7 @@ CREATE TABLE `cat_medios` (
   `creado` bigint(11) DEFAULT NULL COMMENT 'Creado por',
   `modificado` bigint(11) DEFAULT NULL COMMENT 'Modificado por',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COMMENT='Catálogo de medios de envío';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COMMENT='Catálogo de medios de envío';
 
 /*Table structure for table `cat_rutas` */
 
@@ -3122,7 +3130,7 @@ CREATE TABLE `cat_rutas` (
   `modificado` bigint(11) DEFAULT NULL COMMENT 'Modificado por',
   PRIMARY KEY (`id`),
   KEY `NewIndex1` (`origen`,`destino`,`transporte`,`tipo`,`carga`)
-) ENGINE=MyISAM AUTO_INCREMENT=48 DEFAULT CHARSET=latin1 COMMENT='Catálogo de rutas';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COMMENT='Catálogo de rutas';
 
 /*Table structure for table `cat_transportes` */
 
@@ -3146,7 +3154,7 @@ CREATE TABLE `cat_transportes` (
   `creado` bigint(20) DEFAULT '0' COMMENT 'Creado por',
   `modificado` bigint(20) DEFAULT '0' COMMENT 'Modificado por',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=879 DEFAULT CHARSET=latin1 COMMENT='Catálogo de líneas';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COMMENT='Catálogo de líneas';
 
 /*Table structure for table `cat_turnos` */
 
@@ -3170,7 +3178,7 @@ CREATE TABLE `cat_turnos` (
   `creado` bigint(20) DEFAULT NULL COMMENT 'Usuario que creó el registro',
   `modificado` bigint(20) DEFAULT NULL COMMENT 'Usuario que modificó el registro',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Tabla de turnos';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Tabla de turnos';
 
 /*Table structure for table `cat_usuarios` */
 
@@ -3225,7 +3233,7 @@ CREATE TABLE `cat_usuarios` (
   `creado` bigint(11) DEFAULT '0' COMMENT 'Creado por',
   `modificado` bigint(11) DEFAULT '0' COMMENT 'Modificado por',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=165 DEFAULT CHARSET=latin1 COMMENT='Catalogo de usuarios';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COMMENT='Catalogo de usuarios';
 
 /*Table structure for table `cat_vehiculos` */
 
@@ -3252,7 +3260,7 @@ CREATE TABLE `cat_vehiculos` (
   `modificado` bigint(20) DEFAULT '0' COMMENT 'Modificado por',
   PRIMARY KEY (`id`),
   KEY `NewIndex1` (`nombre`)
-) ENGINE=MyISAM AUTO_INCREMENT=170 DEFAULT CHARSET=latin1 COMMENT='Catálogo de máquinas';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COMMENT='Catálogo de máquinas';
 
 /*Table structure for table `configuracion` */
 
@@ -3433,10 +3441,12 @@ CREATE TABLE `configuracion` (
   `asignar_destino` char(1) DEFAULT 'S',
   `asignar_caseta` char(1) DEFAULT 'N',
   `asignar_automatico` char(1) DEFAULT 'N',
-  `visor_mostrar` int(1) DEFAULT '0',
-  `agregar_transporte` char(1) DEFAULT 'N',
+  `visor_mostrar` int(1) NOT NULL DEFAULT '0',
+  `agregar_transporte` char(1) NOT NULL DEFAULT 'N',
+  `ultima_actualizacion` datetime DEFAULT NULL,
   PRIMARY KEY (`id`,`puerto_comm4`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 MIN_ROWS=1 MAX_ROWS=1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 MIN_ROWS=1 MAX_ROWS=1;
+
 
 /*Table structure for table `consultas_cab` */
 
@@ -3471,7 +3481,7 @@ CREATE TABLE `consultas_cab` (
   PRIMARY KEY (`id`),
   KEY `NewIndex1` (`usuario`),
   KEY `NewIndex2` (`usuario`,`general`)
-) ENGINE=MyISAM AUTO_INCREMENT=441 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Tabla de consultas';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Tabla de consultas';
 
 /*Table structure for table `consultas_det` */
 
@@ -3530,7 +3540,7 @@ CREATE TABLE `det_distribucion` (
   `alias` varchar(30) DEFAULT NULL COMMENT 'Alias',
   `estatus` char(1) DEFAULT NULL COMMENT 'Estatus',
   PRIMARY KEY (`id`,`distribucion`,`orden`)
-) ENGINE=MyISAM AUTO_INCREMENT=78 DEFAULT CHARSET=latin1 COMMENT='Detalle de la lista de distribucón';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COMMENT='Detalle de la lista de distribucón';
 
 /*Table structure for table `det_estacion` */
 
@@ -3577,7 +3587,7 @@ CREATE TABLE `det_lista` (
   `modificado` bigint(11) DEFAULT NULL COMMENT 'Usuario que modificó',
   PRIMARY KEY (`id`),
   KEY `NewIndex1` (`lista`,`variable`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COMMENT='Detalle de listas de verificación';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COMMENT='Detalle de listas de verificación';
 
 /*Table structure for table `dias` */
 
@@ -3643,7 +3653,7 @@ CREATE TABLE `horarios` (
   `desde` time DEFAULT NULL COMMENT 'Hora desde',
   `hasta` time DEFAULT NULL COMMENT 'Hora hasta',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=52 DEFAULT CHARSET=latin1 COMMENT='Horarios';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COMMENT='Horarios';
 
 /*Table structure for table `int_eventos` */
 
@@ -3664,7 +3674,7 @@ CREATE TABLE `int_eventos` (
   `creado` bigint(20) DEFAULT '0' COMMENT 'Creado por',
   `modificado` bigint(20) DEFAULT '0' COMMENT 'Modificado por',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=latin1 COMMENT='Catálogo de eventos';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COMMENT='Catálogo de eventos';
 
 /*Table structure for table `int_listados` */
 
@@ -3679,7 +3689,7 @@ CREATE TABLE `int_listados` (
   `file_name` varchar(200) DEFAULT NULL COMMENT 'Nombre del archivo',
   `estatus` char(1) DEFAULT 'A' COMMENT 'Activo?',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=109 DEFAULT CHARSET=latin1 COMMENT='Reportes para el negocio';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COMMENT='Reportes para el negocio';
 
 /*Table structure for table `int_opciones` */
 
@@ -3729,7 +3739,7 @@ CREATE TABLE `log` (
   KEY `NewIndex1` (`fecha`),
   KEY `NewIndex2` (`visto_pc`),
   KEY `NewIndex3` (`visto`)
-) ENGINE=MyISAM AUTO_INCREMENT=6653404 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 /*Table structure for table `mapas` */
 
@@ -3747,7 +3757,7 @@ CREATE TABLE `mapas` (
   `nombre` varchar(50) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   UNIQUE KEY `descripcion` (`descripcion`)
-) ENGINE=MyISAM AUTO_INCREMENT=112 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `mensajes` */
 
@@ -3770,7 +3780,7 @@ CREATE TABLE `mensajes` (
   KEY `NewIndex1` (`prioridad`,`estatus`),
   KEY `NewIndex2` (`estatus`),
   KEY `NewIndex3` (`canal`,`estatus`)
-) ENGINE=MyISAM AUTO_INCREMENT=81548 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 /*Table structure for table `mensajes_procesados` */
 
@@ -3789,7 +3799,7 @@ CREATE TABLE `mensajes_procesados` (
   KEY `NewIndex1` (`id`,`canal`,`prioridad`),
   KEY `NewIndex2` (`fecha`),
   KEY `NewIndex3` (`mensaje`)
-) ENGINE=MyISAM AUTO_INCREMENT=758 DEFAULT CHARSET=latin1 COMMENT='Mensajes a enviar o llamar';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COMMENT='Mensajes a enviar o llamar';
 
 /*Table structure for table `movimientos_cab` */
 
@@ -3815,7 +3825,7 @@ CREATE TABLE `movimientos_cab` (
   `transacciones` int(4) DEFAULT '0' COMMENT 'Número de movimientos del viaje',
   PRIMARY KEY (`id`),
   KEY `NewIndex1` (`requester`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COMMENT='Cabecera de movimientos';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COMMENT='Cabecera de movimientos';
 
 /*Table structure for table `movimientos_det` */
 
@@ -3851,7 +3861,7 @@ CREATE TABLE `movimientos_det` (
   PRIMARY KEY (`id`),
   KEY `NewIndex1` (`cabecera`),
   KEY `NewIndex2` (`requester`)
-) ENGINE=MyISAM AUTO_INCREMENT=116 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 /*Table structure for table `objetos` */
 
@@ -3886,7 +3896,7 @@ CREATE TABLE `politicas` (
   `creado` bigint(20) DEFAULT NULL COMMENT 'Usuario que creó el registro',
   `modificado` bigint(20) DEFAULT NULL COMMENT 'Usuario que modificó el registro',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Tabla de políticas';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Tabla de políticas';
 
 /*Table structure for table `pu_colores` */
 
@@ -3942,7 +3952,7 @@ CREATE TABLE `pu_colores` (
   `estatus` char(1) DEFAULT 'A' COMMENT 'Estatus',
   `eliminable` char(1) DEFAULT 'S',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COMMENT='Colores';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COMMENT='Colores';
 
 /*Table structure for table `pu_graficos` */
 
@@ -4019,7 +4029,7 @@ CREATE TABLE `pu_graficos` (
   `esperado_esquema` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `NewIndex1` (`grafico`)
-) ENGINE=MyISAM AUTO_INCREMENT=166 DEFAULT CHARSET=latin1 COMMENT='Preferencias de usuario (Gráficos)';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COMMENT='Preferencias de usuario (Gráficos)';
 
 /*Table structure for table `relacion_usuarios_opciones` */
 
@@ -4110,7 +4120,7 @@ CREATE TABLE `requesters` (
   KEY `NewIndex1` (`pager`),
   KEY `NewIndex2` (`movil`),
   KEY `NewIndex3` (`estatus`,`estado`)
-) ENGINE=MyISAM AUTO_INCREMENT=1524 DEFAULT CHARSET=utf16 COMMENT='Catálogo de requesters';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf16 COMMENT='Catálogo de requesters';
 
 /*Table structure for table `status_objetos` */
 
@@ -4144,7 +4154,7 @@ CREATE TABLE `tipos_figuras` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=128 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `traduccion` */
 
@@ -4157,7 +4167,7 @@ CREATE TABLE `traduccion` (
   `traduccion` varchar(100) DEFAULT NULL COMMENT 'Traducción',
   PRIMARY KEY (`id`),
   KEY `NewIndex1` (`literal`,`idioma`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1 COMMENT='Tabla de traducción';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COMMENT='Tabla de traducción';
 
 DROP TABLE IF EXISTS `sentencias`;
 

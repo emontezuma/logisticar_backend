@@ -322,7 +322,7 @@ Public Class Form1
                                         tMensajes = tMensajes + 1
                                         mensajeGenerado = True
                                     Catch ex As Exception
-                                        Dim miEror = ex.Message
+                                        agregarLOG("Error al enviar correos " & ex.Message)
                                     End Try
                                 Else
                                     mensajeGenerado = True
