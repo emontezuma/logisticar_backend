@@ -408,6 +408,7 @@ Partial Class XtraForm1
         '
         'arduino
         '
+        Me.arduino.Enabled = True
         Me.arduino.Interval = 1000
         '
         'reenviarMMCALL

@@ -245,7 +245,7 @@ Public Class XtraForm1
             End If
 
         End If
-        calcularRevision()
+        'calcularRevision()
         enMonitor = True
         'revisaFlag.Enabled = False
         revisarEventos()

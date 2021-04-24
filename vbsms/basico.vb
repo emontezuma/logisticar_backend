@@ -13,7 +13,7 @@ Module basico
     Public autenticado As Boolean
     Public cadenaConexion As String
     Public be_log_activar As Boolean = False
-    Public rutaBD As String = "logisticar"
+    Public rutaBD As String = "logisticar2"
 
     Sub Main(argumentos As String())
         If Process.GetProcessesByName _
